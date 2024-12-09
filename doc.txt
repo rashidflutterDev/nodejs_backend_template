@@ -61,3 +61,116 @@ start the server with express
 app.listen(PORT , HOSTNAME, () => {})  --> require 3 things to start the server --> 1 PORT, 2 HOSTNAME, 3 CALLBACK () => {}
 
 
+
+3. npm i dotenv
+    create .gitignore if it does not +nt there 
+    add .node_modules
+    add .env 
+
+    both will be ignored to be pushed to gitHub because .evv has secrete information like api keys connection urls ports etc 
+
+   // require('dotenv').config(); // modern way
+                                   bcz we can do Configurations like require('dotenv').config(override = true)  
+                                   by default it was false ...... but we dont need that
+    require("dotenv/config"); 
+
+    why are we doin that importing and we are also not storing it in a variable 
+    because we just need import at the top 
+
+    now we can access the variables defined inside of .env 
+    like 
+    proccess.env.HOSTNAME
+    proccess.env.PORT -> for port stored in .env file
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++ + ++++ ++ +++++++++++++++++++++++++++++++++++++++++++
+
++   const express = require("express");                                                          +
++   require("dotenv/config");                                                                   +
++   const app = express();                                                                       +
++   const env = process.env;                                                                     +
++                                                                                               +
++   // starting server                                                                           +
++   const port = env.PORT || 3000;                                                               +
++   const host = env.HOST || '0.0.0.0';                                                          +
++                                                                                               +
++   app.listen(port, host,() => {                                                                 +
++       console.log(`Server is running on http://${host}:${port}`);                              +
++   })                                                                                           +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+5.
+// how a route is looked like ?
+   app.get('/' , req , res) => {
+    req.body  --> this gives us the full body that we passed from our client as jsonEncoded
+    we also has :
+    1. params 
+    2. quesryParams
+       let say we have a url of youtube video 
+       url = https://www.youtube.com/whatch?v=jdoiejoijoijsoj&ab_channel=rashidflutterdeveloper
+       www.youtube.com  --> domain name 
+       /watch --> route name (/)
+       but we also have (i): ?v and (ii): &ab_channel
+
+       these both are called quesryParams
+       they both are passed with query 
+       and they are not the part of main url  ... becoz the original path or url looks /something/someother/
+       
+
+       but when ? or & appears its quesry for the specific need ... whay in this way becoz get requests do not have body ....
+       a query param gives more information
+
+
+       then if both are quesryParams whats the difference between ? and & 
+       simple for hard thing would be that if we want to give quesryParam we would do start it with ?
+       but if there is more than one so we will start quesryParam with ? but they will be seperated as well we can say concatinated with &..
+
+       for accessing query params we do 
+       const videoId = req.query.v
+              where the v in url should be the vedioId 
+              so in query param case we should know the variable the is representing the value .
+              so typo will not get the quesryParam ...
+
+           const channel = req.query.ab_channel
+
+
+       2. params (pathParams)
+       pathParams are the params that are passed directly with the url 
+
+       let say url =  https://www.youtube.com/whatch/hshshljshocjk
+                   where "hshshljshocjk" --> is vedioId (pathParam)
+        so to get this like 
+
+        on backend our route would be like
+        app.get('/whatch/videos/:id){
+                     you can also do    --> app.get('/whatch/videos/:id/:ab_channel)
+        return res.json({'vedioId' : req.param.id})
+
+        so this id the thing that we specify by backend but shoould be same in route and while accessing
+        how client will do is 
+        http://localhost:3000/watch/videos/12345
+
+        where 12345 is the id 
+
+        }      
+
+        calling: http://localhost:3000/whatch/videos/12121212      ---> out put { " vedioId " : 12121212}
+
+   }
+
+
+   // now lets talk about res.send()
+
+   you can do res.send() if you want to return text 
+   also res.send('<h1> hi Welcome to home </h1>') you can do  send tags if you are working with browers kind of stuff 
+
+  we also have res.json({})  in this we send json it is king of mao we send data n key and value pair and its will be used the most 
+  so incase of error we send re.status().jaon()
+  default status = 200 
+  incase of server error we send 400 500 etc 
+
+  so incase of error we send status code other that 200 and 201
+
+  

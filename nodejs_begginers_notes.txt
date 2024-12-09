@@ -1,0 +1,174 @@
+Node js 
+lets say in ui of flutter code we have loggin and create accoute(sign up user) code 
+
+so for backend you can create a folder outside of lib or create a sereate backend project 
+
+i will do it the first way inside of my project out side of lib (mkdir server)
+
+now install the node js from its origional website 
+click on the server folder and open (vs code integrated) terminal 
+
+
+To initialize node js in our project we will do 
+npm init
+     it will ask about some configuration ... but we will be going with the defaults ( so click enter on everything )
+     if you want something to not be default you can change it 
+
+     also if you want every thing as default you can do --> npm init-y 
+
+     in configuration it asks about the entry point , pakage name , version , description , keywords , author etc 
+
+     if you keep pressing enter at the end you will get a file inside of the server folder as package.json 
+     now this file is similar to pubspec.ymal file in flutter .
+
+     it contains --> name of the project , version , description , main point or entry point , scripts , author , licences 
+     you can configure it according to your settings
+
+     (there is one other thing which is not added in dependencies ... when we install npm packages we will write dependencies in this file like in flutter we write for pub.dev packages in pubspec.yaml)
+
+
+     1. we will create our first file to start named as index.js (if you are name this file you should change it to that in pakage.json)
+     it is necceassary to name it as index.js bcoz in defaults we get index.js as our enter point 
+
+     i am going with index.js 
+     so lets do print "Hello world" in node js 
+
+     console.log("Hello world")  ;
+     it like print hello world ( consol.log() --> use in js programs ) 
+                                           [save]
+
+                                           TO run it we can do [node .] <--- this is to run the whole folder
+                                           or you can mention the file you want to run 
+                                           and that what we want we wnna run node index .js 
+    we will get "Hello world" as out put.
+
+    now after this you can clear you terminal and also we named our file as .js 
+    bcoz in node we write js ... so node is not a language its just javascript environment to write server side code.
+
+
+    it was our first script in nodejs 
+    Now lets dive into the dependencies 
+    what are the dependencies in flutter nodejs or in any programing language or environment or framwork ?
+
+     formal defination :  software dependency is an external stand alone library that can be organize  into packages to perform specific tasks .
+
+     npm stands for --/>  node package manager 
+     npm.com is the pub.dev of js . Where we can search the pkg that we wanna use ..
+
+     we are going to to use http mongoose , express 
+
+     so we will intall them from npm ... documentation of these is present on npm you can check it out 
+
+     how to install packages?
+     npm install pkg_name (or) 
+     npm i pkg_name 
+
+     so npm install http express mongoose
+
+     express : it is the one our app will relay on ... it is the pre built node js framwork that will help us ro creat eserver side applications faster and even smarter 
+                it is very sumple and minimal and as it is a pkg .. its going to reduce our work load by alot ... well be very beneficial 
+
+    mongoose : it is a mongoDb object modeling tool desigened to work in an asyncronous environment.
+               mongoose supports both promises (futures in dart) and callbacks.
+
+    so npm i http express mongoose
+    to insall multile dependencies we can seperate them by space ... also there is no need of manually writing dependencies in package.json.. 
+    it will do t=it by itself after running command and insalling packages.
+
+    if you want any particular version of any pakage 
+    like lets say mongoose bcoz the sometimes require the same version if there is imcompatibility ...
+    we can do like : npm install mongoose@5.6.5  
+
+
+    Lets get start to creating our first api with nodejs 
+    for create api we are going to use express for it .
+
+    const express = require("express");
+
+    express is insalles from npm and this is the import line for that (only)
+
+    cont app = express()
+    here we are creating instance of the express or initializing express and storing it in variable app.
+
+    and now we can do 
+
+    app.listen()
+                --->  starts server
+                this will recides at the end of this file all the api code will be in between import line and (sort of conversion)
+
+    this app.listen() --> basically binds itself with the host that we are going to to specify and listen for any other connections.
+
+    listen() methode id simply helping us to start our server.
+    so when we use this it will continously listen to our server and will respond .
+
+    so now we have to first of all to give it a port .
+
+    create a variable for that at the top for maintaining purposes of your code 
+
+    const port = 8000;
+
+    you can put any number but 8000 is mine convension 
+
+    so app.listen(port,-------)
+                 ------  now here if we do not mention any host .. it will by default access localhost.
+
+    what is localhost? 
+    suppose you call an ip adress on your computer ... ip address is some random string like 192.991 etc .
+
+    so whenever you try to call an ip address you are trying to contact another computer on the internet .
+    but when you call ip address like 127.0.0.1
+       then you are communicating with the localhost.
+    it means the computer is talking ti itself.
+
+    so when we do not specify anything it will take in localhost 
+    also if we mention ip address we can access localhost .
+
+
+    but we are going to specify an ip address of '0.0.0.0'
+    which stands for it can be accessed from anywhere .
+
+    and the reason we need to specify ip address is because android emulators and even android devices ...
+     if we use localhost it wont work but in case of iphone it works .  these all are just for debugging or development 
+    while deploying it will give us a url which we can use when we deploy it on website.
+
+    so app.listen(PORT < "0.0.0.0", () => {
+        console.log(`connected at port $PORT`);
+    })
+
+    "" or ' ' instead i am using ` ` because its best for string interpolation in javascript. 
+
+    now lets check node index.js (npm index.js)
+    lets say we changed simething in our program  suppose console content .. for running agin we well have to clear or exit and its quite combersum 
+    we can't do it while makeing each change to see if its working so instaed for this we will install a dev-dependency called nodemon.
+
+    nodemon will add the hotreload feature like flutter in our nodejs code .. on save file it will re run the server and will respond to changes .
+
+    npm i nodemon --save-dev
+    --save-dev for saving as dev-dependency
+    dev-dependency becoz we are not using it in our code it is just for developer experience .
+
+    now to do easy our work we will go to package.json file and add a script 
+    scripts :  {
+        "dev" : "nodemon ./index.js"
+    }
+    basically by this now if we do 
+    npm run dev ---> when ever we run this it will call the dev of scripts so index.js will be run like this.
+
+    now if we make change and save it it will restart the whole server (on saving file) -----> its like hot restart
+
+    now add one more script as "start" 
+    scripts :  {
+        "dev" : "nodemon ./index.js"
+        "start" :node ./index.js -- > for production bcoz in there we do not have nodemon
+    }
+
+
+
+
+  
+
+
+
+
+
+                                                    
