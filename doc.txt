@@ -1,0 +1,63 @@
+
+try to close to this 
+
+
+my-backend-project/
+├── node_modules/       # Installed dependencies
+├── src/                # Application source code
+│   ├── routes/         # Routes folder
+│   │   └── index.js    # Define API routes here
+│   ├── app.js          # Main application file
+│   └── config.js       # Configurations (e.g., environment variables)
+├── .env                # Environment variables
+├── .gitignore          # Files to ignore in Git
+├── package.json        # Project metadata and scripts
+└── package-lock.json   # Lock file for dependencies
+
+
+
+
+1. Download and install Node.js
+node -v
+npm -v
+
+mkdir my-backend-project
+cd my-backend-project
+
+npm init -y
+
+
+
+
+start with nodemon
+// with nodemon we get access to the hot restart functionlity ...
+npm install --save-dev nodemon
+add scripts :
+
+    "start": "node app.js", // For production
+    "dev": "nodemon app.js" // For development
+
+
+    also change :   "main": "index.js", to   "main": "app.js", --> if your entry point is app.js
+(
+    scripts are the short cut keys commands for long commands 
+    eg : if we wanned to do npm run node index.js 
+    we can do 
+          scripts{
+         "run" : "node index.js"
+          }
+
+    now in terminal if we do :
+    npm run run 
+    we will get the same out put 
+)
+
+2. insall and configure express 
+express is the framwork 
+
+npm i express
+
+start the server with express 
+app.listen(PORT , HOSTNAME, () => {})  --> require 3 things to start the server --> 1 PORT, 2 HOSTNAME, 3 CALLBACK () => {}
+
+

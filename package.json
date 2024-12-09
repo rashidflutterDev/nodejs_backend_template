@@ -1,0 +1,22 @@
+{
+  "name": "nodejs_backend_template",
+  "version": "1.0.0",
+  "description": "\"A template project usin node with mongoDb \"",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "backend"
+  ],
+  "author": "Rashid",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
